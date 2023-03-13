@@ -2,7 +2,9 @@ var bleno = require('bleno')
 
 var BlenoPrimaryService = bleno.PrimaryService
 
-var NetCharacteristic = require('./ssidCharacteristic')
+var ssidCharacteristic = require('./ssidCharacteristic')
+
+var pwdCharacteristic = require('./pwdCharacteristic')
 
 bleno.on('stateChange', function(state) {
     console.log('on-stateChange:' + state);
