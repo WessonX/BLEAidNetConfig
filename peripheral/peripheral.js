@@ -2,7 +2,7 @@ var bleno = require('bleno')
 
 var BlenoPrimaryService = bleno.PrimaryService
 
-var NetCharacteristic = require('./characteristic')
+var NetCharacteristic = require('./ssidCharacteristic')
 
 bleno.on('stateChange', function(state) {
     console.log('on-stateChange:' + state);
@@ -20,7 +20,8 @@ bleno.on('advertisingStart', function(error) {
             new BlenoPrimaryService({
                 uuid:'ec00',
                 characteristics:[
-                    new NetCharacteristic()
+                    new ssidCharacteristic(),
+                    new pwdCharacteristic()
                 ]
             })
         ])
