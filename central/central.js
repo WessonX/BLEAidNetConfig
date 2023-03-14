@@ -17,6 +17,7 @@ noble.on('discover',peripheral => {
     noble.stopScanning();
     const name = peripheral.advertisement.localName;
     console.log("find device. name:" + name)
+    connectAndSetup(peripheral) 
 });
 
 function connectAndSetup(peripheral) {
