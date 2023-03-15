@@ -2,9 +2,8 @@ var bleno = require('bleno')
 
 var BlenoPrimaryService = bleno.PrimaryService
 
-var ssidCharacteristic = require('./ssidCharacteristic')
+var wifiCharacteristic = require('./wifiCharacteristic')
 
-var pwdCharacteristic = require('./pwdCharacteristic')
 
 bleno.on('stateChange', function(state) {
     console.log('on-stateChange:' + state);
@@ -22,8 +21,7 @@ bleno.on('advertisingStart', function(error) {
             new BlenoPrimaryService({
                 uuid:'ec00',
                 characteristics:[
-                    new ssidCharacteristic(),
-                    new pwdCharacteristic()
+                    new wifiCharacteristic()
                 ]
             })
         ])
