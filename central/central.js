@@ -1,4 +1,4 @@
-const noble = require('noble')
+const noble = require('../node_modules/noble')
 
 const SERVICE_UUID = 'ec00'
 const pwdCharacteristic_UUID = 'ec10'
