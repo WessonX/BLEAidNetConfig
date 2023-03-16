@@ -40,8 +40,7 @@ function onButtonClick() {
     return services[0].getCharacteristics()
   })
   .then(characteristics => {
-    pwdCharacteristic = characteristics[1]
-    ssidCharacteristic = characteristics[0]
+    wifiCharacteristic = characteristics[0]
   })
   .catch(error => {
     console.log('Argh! ' + error);
@@ -50,28 +49,25 @@ function onButtonClick() {
 
 // 将字符串转换为ArrayBuffer
 function str2Buffer(str) {
-  var buf = new ArrayBuffer(str.length * 2); // 每个字符占用2个字节
-  var bufView = new Uint16Array(buf);
-  for (var i = 0, strLen = str.length; i < strLen; i++) {
-    bufView[i] = str.charCodeAt(i);
-  }
-  return buf;
+  // var buf = new ArrayBuffer(str.length * 2); // 每个字符占用2个字节
+  // var bufView = new Uint16Array(buf);
+  // for (var i = 0, strLen = str.length; i < strLen; i++) {
+  //   bufView[i] = str.charCodeAt(i);
+  // }
+  // return buf;
+  return new TextEncoder().encode(str)
 }
 
 function connectWifi(){
     const pwdStr = document.getElementById("pwd").value
     const ssidStr = document.getElementById("ssid").value
-    const dataObj = {
-        ssid:ssidStr,
-        pwdStr:pwdStr
-    }
+    var dataObj = { "ssid":ssidStr, "pwd":pwdStr};
     const dataStr = JSON.stringify(dataObj)
-
-    const pwd = str2Buffer(pwdStr);
-    const ssid = str2Buffer(ssidStr);
+    console.log(dataStr)
     const dataBuffer = str2Buffer(dataStr)
-    pwdCharacteristic.writeValueWithResponse(pwd)
-    ssidCharacteristic.writeValueWithResponse(dataBuffer)
+
+    wifiCharacteristic.writeValueWithResponse(dataBuffer)
+
     console.log("wifi名称:" + ssidStr)
     console.log("wifi密码:" + pwdStr)
 }
