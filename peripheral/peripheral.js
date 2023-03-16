@@ -4,6 +4,8 @@ var BlenoPrimaryService = bleno.PrimaryService
 
 var wifiCharacteristic = require('./wifiCharacteristic')
 
+var ipCharacteristic = require('./ipCharacteristic')
+
 
 bleno.on('stateChange', function(state) {
     console.log('on-stateChange:' + state);
@@ -21,7 +23,8 @@ bleno.on('advertisingStart', function(error) {
             new BlenoPrimaryService({
                 uuid:'ec00',
                 characteristics:[
-                    new wifiCharacteristic()
+                    new wifiCharacteristic(),
+                    new ipCharacteristic()
                 ]
             })
         ])
