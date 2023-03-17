@@ -11,6 +11,8 @@
         <label>wifi名称(SSID)     </label>:<input type="text" placeholder="请输入wifi名称" name="ssid" id="ssid"> <br>
         <label>wifi密码(Passsword):</label><input type="password" placeholder="请输入wifi密码" name="pwd" id="pwd"><br>
         <button type="button" onclick="connectWifi()">连接</button><br>
+        <label>ip地址:</label><label id="ipAddr"></label><br>
+        <button type="button" onclick="getIPAddr()">获取ip地址</button><br>
     </form>
 
 </body>
@@ -40,7 +42,14 @@ function onButtonClick() {
     return services[0].getCharacteristics()
   })
   .then(characteristics => {
-    wifiCharacteristic = characteristics[0]
+    characteristics.forEach(element => {
+      // 判断这个特征是否为wifi属性
+      if(element.uuid.search("ec0e") != -1) {
+        wifiCharacteristic = element
+      } else {
+        ipCharacteristic = element
+      }
+    });
   })
   .catch(error => {
     console.log('Argh! ' + error);
@@ -49,12 +58,6 @@ function onButtonClick() {
 
 // 将字符串转换为ArrayBuffer
 function str2Buffer(str) {
-  // var buf = new ArrayBuffer(str.length * 2); // 每个字符占用2个字节
-  // var bufView = new Uint16Array(buf);
-  // for (var i = 0, strLen = str.length; i < strLen; i++) {
-  //   bufView[i] = str.charCodeAt(i);
-  // }
-  // return buf;
   return new TextEncoder().encode(str)
 }
 
@@ -70,6 +73,13 @@ function connectWifi(){
 
     console.log("wifi名称:" + ssidStr)
     console.log("wifi密码:" + pwdStr)
+}
+
+function getIPAddr(){
+  ipCharacteristic.readValue().then(value=>{
+     let decoder = new TextDecoder('utf-8');
+     document.getElementById("ipAddr").innerText = decoder.decode(value)
+  });
 }
 </script>
 </html>
