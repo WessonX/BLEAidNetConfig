@@ -14,7 +14,7 @@ try {
 } catch (error) {
     macAddr = getMAC().replace(/:/g,'')
 }
-process.env["BLENO_DEVICE_NAME"] = "MRobot-"+ macAddr.slice(-6)
+process.env["BLENO_DEVICE_NAME"] = 'MRobot-'+ macAddr.slice(-6)
 
 bleno.on('stateChange', function(state) {
     console.log('on-stateChange:' + state);
