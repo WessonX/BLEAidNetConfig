@@ -22,8 +22,14 @@ function onButtonClick() {
 
   let options = {};
   let optionalServices = [0xec00]
-  options.acceptAllDevices = true;
+  
+  // 蓝牙扫描过滤
+  filters = [
+    {services:[0xec00]},
+    // {namePrefix:"MRobot"}
+  ]
   options.optionalServices = optionalServices
+  options.filters = filters
 
   console.log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(options)

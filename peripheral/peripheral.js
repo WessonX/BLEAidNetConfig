@@ -5,7 +5,16 @@ var BlenoPrimaryService = bleno.PrimaryService
 var wifiCharacteristic = require('./wifiCharacteristic')
 
 var ipCharacteristic = require('./ipCharacteristic')
+const { default: getMAC } = require('getmac')
 
+
+// 获取本机的mac地址.作为蓝牙设备名称的一部分
+try {
+    macAddr = getMAC("wlan0").replace(/:/g,'')
+} catch (error) {
+    macAddr = getMAC().replace(/:/g,'')
+}
+process.env["BLENO_DEVICE_NAME"] = "MRobot-"+ macAddr.slice(-6)
 
 bleno.on('stateChange', function(state) {
     console.log('on-stateChange:' + state);
