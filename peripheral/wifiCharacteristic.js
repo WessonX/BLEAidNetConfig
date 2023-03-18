@@ -14,7 +14,7 @@ wifi.init({
 var wifiCharacteristic = function() {
     wifiCharacteristic.super_.call(this, {
         uuid:'ec0e',
-        properties:['write'],
+        properties:['write','notify'],
         descriptors:[ new bleno.Descriptor({
             uuid: '2901',
             value: 'set wifi ssid and pwd '
@@ -39,7 +39,7 @@ var wifiCharacteristic = function() {
 // 自定义的wifiCharacteristic继承自bleno的BlenoCharacteristic
 util.inherits(wifiCharacteristic,BlenoCharacteristic);
 
-wifiCharacteristic.prototype=onSubscribe = function(maxValueSize, updateValueCallback) {
+wifiCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback) {
     console.log("wifiCharacteristic- onSubscribe")
     this._updateValueCallback = updateValueCallback
 }
