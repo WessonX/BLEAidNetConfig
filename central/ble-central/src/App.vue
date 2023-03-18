@@ -62,10 +62,6 @@ import Setting from './components/Setting.vue'
   </script>
 
 <style >
-#app{
-  /* background-color: rgb(26,26,26) */
-}
-
 body {
   padding: 0;
   margin: 0;
