@@ -8,15 +8,15 @@ const { default: getMAC } = require('getmac')
 
 // // Connect to a network
 // wifi.connect({ ssid: "Wesson", password:"wessonx972385076" }, () => {
-//     wifi.getCurrentConnections((error,currentConnections) => {
-//         if (error) {
-//             console.log("failed");
-//             console.log(error)
-//         }else {
-//             console.log("connected")
-//             console.log(currentConnections)
-//         }
-//     });
+    // wifi.getCurrentConnections((error,currentConnections) => {
+    //     if (error) {
+    //         console.log("failed");
+    //         console.log(error)
+    //     }else {
+    //         console.log("connected")
+    //         console.log(currentConnections)
+    //     }
+    // });
 // });
 // var ip = require('ip');
  
