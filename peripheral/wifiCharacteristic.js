@@ -22,10 +22,27 @@ var wifiCharacteristic = function() {
     });
     // 网络id和pwd
     this.wifiData = Buffer.alloc(0)
+
+    // 连接wifi的状态
+    this.isSuccess = Buffer.alloc(0)
+
+    // 值更新的回调
+    this._updateValueCallback = null
+
+    // 设置前的wifi名称
+    this.beforeWifi = ""
+
+    // 设置后的wifi名称
+    this.afterWifi = ""
 };
 
 // 自定义的wifiCharacteristic继承自bleno的BlenoCharacteristic
 util.inherits(wifiCharacteristic,BlenoCharacteristic);
+
+wifiCharacteristic.prototype=onSubscribe = function(maxValueSize, updateValueCallback) {
+    console.log("wifiCharacteristic- onSubscribe")
+    this._updateValueCallback = updateValueCallback
+}
 
 wifiCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
     this.wifiData = data
@@ -35,9 +52,29 @@ wifiCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResp
     console.log("onWriteRequest: ssid = " + wifiData_obj.ssid + " pwd:" + wifiData_obj.pwd)
     callback(this.RESULT_SUCCESS)
 
+    // 获取连接前的wifi状态
+    wifi.getCurrentConnections((error,currentConnections)=>{
+        this.beforeWifi = currentConnections[0].ssid
+    });
+
     // Connect to a network
     wifi.connect({ ssid: wifiData_obj.ssid, password:wifiData_obj.pwd }, () => {
-        console.log('Connected'); 
+        // 判断是否连接成功
+        wifi.getCurrentConnections((error,currentConnections) => {
+            if (error) {
+                console.log("failed" + error);
+                this.isSuccess = Buffer.from("false")
+            }else {
+                if (currentConnections.length != 0 && currentConnections[0].ssid == wifiData_obj.ssid ) {
+                    this.isSuccess = Buffer.from("true")
+                    console.log("connected")
+                } else {
+                    this.isSuccess = Buffer.from("false")
+                    console.log("failed")
+                }
+            }
+        });
+        this._updateValueCallback(this.isSuccess)
     });
 }
 
