@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "push":"npm run build && scp -r dist/* root@47.112.96.50:/www"
   },
   "dependencies": {
     "element-plus": "^2.3.0",
