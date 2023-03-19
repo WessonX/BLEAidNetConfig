@@ -4,7 +4,7 @@
 
 ## Usage
 
-+ For centenral(i.e the front-end webPage),visit our website, or deploy the folder /ble-central into your own server.
++ For centenral(i.e the front-end webPage),visit our website https://test1.mcurobot.com/, or deploy the folder /ble-central into your own server.
 
 +  For peripheral(i.e your device), download the folder /peripheral  into your device.
 
