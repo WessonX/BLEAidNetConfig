@@ -2,9 +2,13 @@
 
 ​	In face of "Internet of things", the first problem of users having to face is have their device connected into Internet. Yet many devices have no user interface to configure the network. BLE(Bluetooth Low Energy) could help. Our program running on devices will broadcast itself, with specified hostname, uuid and services.Once our front-end webPage scan the device, user could input specified wifi ssid and wifi pwd to the device via ble. 
 
++ For central,it's based on web-bluetooth-API. Being an experimental tech, it hasn't support all platForms and browsers. [Check your browser compatiability](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API#browser_compatibility)
+
++ For peripheral, it's based on `bleno`
+
 ## Usage
 
-+ For centenral(i.e the front-end webPage),visit our website https://test1.mcurobot.com/, or deploy the folder /ble-central into your own server.
++ For central(i.e the front-end webPage),visit our website https://test1.mcurobot.com/, or deploy the folder /ble-central into your own server.
 
 +  For peripheral(i.e your device), download the folder /peripheral  into your device.
 
