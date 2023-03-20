@@ -1,14 +1,14 @@
 <template>
-    <div>
+    <div id="root">
         <el-card  id="card" >
-            <div id="introduction">
-                <el-text size="large" style="color:rgb(25,25,25)">
+            <article id="introduction">
+                <el-text size="large"  style="color:rgb(25,25,25);">
                     This site intends to provide a User Interface configuring your device's wifi connection,
                     via the use of BLE(Bluetooth Low Energy).Connecting to the Internet is a must  but annoying step for those devices 
                     who do not have an  UI interface to configure,like raspberry pie, your homeKit, your watch etc. 
                     But with preInstalling our service,you can now easily make it! 
                 </el-text>
-            </div>
+            </article>
             <el-button type="primary" size="Large" :icon="Search" round id="button" @click="startScan">Go Scan!</el-button>
         </el-card>
     </div>
@@ -110,21 +110,27 @@ export default {
 </script>
 
 <style>
+#root{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #card{
-top: 20%;
-bottom: 40%;
-left: 30%;
-right: 30%;
-position: absolute;
+    width: 600px;
+    height: 300px;
+    position:relative
 }
 
 #button{
-    bottom: 15%;
-    left:40%;
-    position:absolute;
+    position: absolute;
+    bottom: 10%;
+    left: 40%;
 }
 
 #introduction {
     line-height: 35px;
+    white-space: pre-wrap;
 }
 </style>

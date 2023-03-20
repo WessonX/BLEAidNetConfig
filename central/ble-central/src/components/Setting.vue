@@ -1,8 +1,22 @@
 <template>
-    <el-row v-if="!showForm" id="setting" :gutter="20" type="flex" justify="center" align="middle">
-        <el-col :span="6"><el-button id="wifiSetting" @click="wifiSetting"></el-button></el-col>
-        <el-col :span="6"><el-button id="getip" @click="getIP"></el-button></el-col>
-        <el-col :span="6"> <el-button id="rescan" type="button" @click="rescan"></el-button></el-col>
+    <el-row v-if="!showForm"  :gutter="20" id="setting"  type="flex" justify="center" align="middle">
+        <el-col :span="6">
+            <el-tooltip effect="dark" placement="top" content="设置wifi">
+                <el-button id="wifiSetting" @click="wifiSetting"></el-button>
+            </el-tooltip>
+        </el-col>
+
+        <el-col :span="6">
+            <el-tooltip effect="dark" placement="top" content="获取ip地址">
+                <el-button id="getip" @click="getIP"></el-button>
+            </el-tooltip>
+        </el-col>
+
+        <el-col :span="6">
+            <el-tooltip effect="dark" placement="top" content="重新扫描">
+                <el-button id="rescan" type="button" @click="rescan"></el-button>
+            </el-tooltip>
+        </el-col>
     </el-row>
 
     <el-card v-if="showForm" id="form" align="middle">
