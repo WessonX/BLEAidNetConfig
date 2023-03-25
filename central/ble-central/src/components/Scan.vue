@@ -19,9 +19,21 @@ import { h } from 'vue'
 import { ElNotification } from 'element-plus'
 export default {
     emits:["bleConnected","finishConnecting"],
+    created(){
+        // 检查当前设备是否支持
+            navigator.bluetooth.getAvailability().then((available) => {
+            if (available) {
+                console.log("This device supports Bluetooth!");
+            } else {
+                console.log("Doh! Bluetooth is not supported");
+                ElNotification({
+                    message: h('i', { style: 'color: teal' }, '当前设备不支持蓝牙'),
+                })
+            }
+        });
+    },
     methods: {
         startScan() {
-
             ElNotification({
                 message: h('i', { style: 'color: teal' }, '正在努力扫描蓝牙设备:D'),
             })
@@ -94,6 +106,10 @@ export default {
             if (error.message.search("cancelled") != -1) {
                 ElNotification({
                     message: h('i', { style: 'color: teal' }, '您取消了扫描操作'),
+                })
+            } else {
+                ElNotification({
+                    message: h('i', { style: 'color: teal' }, error.message),
                 })
             }
 
