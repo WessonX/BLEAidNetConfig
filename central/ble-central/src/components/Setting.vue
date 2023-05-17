@@ -105,13 +105,13 @@ export default {
 
             var dataObj = { "ssid": this.ssid, "pwd": this.pwd };
             const dataStr = JSON.stringify(dataObj)
-            console.log(dataStr)
             const dataBuffer = new TextEncoder().encode(dataStr)
 
             this.wifiCharacteristic.writeValueWithResponse(dataBuffer)
 
-            console.log("wifi名称:" + this.ssid)
-            console.log("wifi密码:" + this.pwd)
+            // 清空输入框的数据
+            this.ssid = ""
+            this.pwd = ""
 
             this.$emit("startConnecting")
         }

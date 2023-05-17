@@ -73,8 +73,8 @@ wifiCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResp
                     console.log("failed")
                 }
             }
+            this._updateValueCallback(this.isSuccess)
         });
-        this._updateValueCallback(this.isSuccess)
     });
 }
 
