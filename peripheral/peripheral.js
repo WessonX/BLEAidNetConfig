@@ -12,9 +12,13 @@ const { default: getMAC } = require('getmac')
 try {
     macAddr = getMAC("wlan0").replace(/:/g,'')
 } catch (error) {
-    macAddr = getMAC().replace(/:/g,'')
+    try {
+        macAddr = getMAC().replace(/:/g,'')
+    } catch (error) {
+        macAddr = 'default'
+    }
 }
-process.env["BLENO_DEVICE_NAME"] = 'MRobot-'+ macAddr.slice(-6)
+process.env["BLENO_DEVICE_NAME"] = 'MRobot-'+ macAddr.slice(-7)
 
 bleno.on('stateChange', function(state) {
     console.log('on-stateChange:' + state);
