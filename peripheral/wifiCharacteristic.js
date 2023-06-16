@@ -29,11 +29,6 @@ var wifiCharacteristic = function() {
     // 值更新的回调
     this._updateValueCallback = null
 
-    // 设置前的wifi名称
-    this.beforeWifi = ""
-
-    // 设置后的wifi名称
-    this.afterWifi = ""
 };
 
 // 自定义的wifiCharacteristic继承自bleno的BlenoCharacteristic
@@ -52,10 +47,6 @@ wifiCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResp
     console.log("onWriteRequest: ssid = " + wifiData_obj.ssid + " pwd:" + wifiData_obj.pwd)
     callback(this.RESULT_SUCCESS)
 
-    // 获取连接前的wifi状态
-    wifi.getCurrentConnections((error,currentConnections)=>{
-        this.beforeWifi = currentConnections[0].ssid
-    });
 
     // Connect to a network
     wifi.connect({ ssid: wifiData_obj.ssid, password:wifiData_obj.pwd }, () => {
