@@ -19,7 +19,18 @@
 
 Especially, peripheral.js is based on "bleno","bluetooth-hcisocket", and there might be problems when you execute 'npm install'.**It's advised to downgrade your node version to v8.9.0**. [Other precautions are mentioned in bleno](https://github.com/noble/bleno)
 
-You can try on writing a systemctl service, so as to make the peripheral program run automatically when the device is start.
+You can try on writing a systemctl service, so as to make the peripheral program run automatically when the device is start. In BLE_NET_CONN/peripheral, ble-net.service could be referenced.  Copy ble-net.service to the directory: /etc/systemd/system. 
+
+Then execute:
+
+```
+sudo systemctl daemon-reload
+sudo systemctl start ble-net.service
+sudo systemctl status ble-net.service
+// if success, exec code below
+sudo systemctl enable ble-net.service
+```
+
 
 
 

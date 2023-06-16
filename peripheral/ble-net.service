@@ -1,0 +1,9 @@
+[Unit]
+Description=BLE Network Daemon
+After=rc-local.service
+
+[Service]
+ExecStart=/home/pi/node-v8.9.4-linux-arm64/bin/node ./peripheral/peripheral. js
+WorkingDirectory=/home/pi/BLEAidNetConfig
+[Install]
+WantedBy=multi-user.target
